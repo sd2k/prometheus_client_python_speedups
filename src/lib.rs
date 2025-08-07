@@ -9,10 +9,14 @@ use std::{
 };
 
 use hashbrown::HashMap;
+use mimalloc::MiMalloc;
 use pyo3::{exceptions::PyIOError, prelude::*, types::PyList};
 use serde::{Deserialize, Serialize};
 
 use crate::compact_string::CompactString;
+
+#[global_allocator]
+static GLOBAL: MiMalloc = MiMalloc;
 
 const LE: CompactString = CompactString::const_new("le");
 const PID: CompactString = CompactString::const_new("pid");
